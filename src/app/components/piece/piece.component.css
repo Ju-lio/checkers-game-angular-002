@@ -1,0 +1,13 @@
+.piece {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.dark {
+  background: #4E4234;
+}
+
+.light {
+  background: #F4DDCB;
+}

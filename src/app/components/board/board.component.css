@@ -1,0 +1,7 @@
+body {
+  border: 15px solid #663306;
+}
+
+div {
+  display: flex;
+}

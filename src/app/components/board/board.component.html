@@ -1,0 +1,12 @@
+<body>
+  <div *ngFor="let board of boards">
+    <div *ngFor="let columns of board.columns">
+     <app-square
+      [color]="getColor(board.line, columns.column)"
+      [line]="board.line"
+      [column]="columns.column"
+     >
+     </app-square>
+    </div>
+  </div>
+</body>

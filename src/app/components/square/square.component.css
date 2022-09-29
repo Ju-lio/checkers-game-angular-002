@@ -1,0 +1,19 @@
+div {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark {
+  background: #BC9574;
+}
+
+.light {
+  background: #CAAF9C;
+}
+
+body {
+  display: flex;
+}
