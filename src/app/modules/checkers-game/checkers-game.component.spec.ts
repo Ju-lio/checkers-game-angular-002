@@ -8,9 +8,8 @@ describe('CheckersGameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckersGameComponent ]
-    })
-    .compileComponents();
+      declarations: [CheckersGameComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CheckersGameComponent);
     component = fixture.componentInstance;

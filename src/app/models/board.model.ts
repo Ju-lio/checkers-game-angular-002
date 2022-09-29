@@ -1,6 +1,6 @@
-import { Column } from "./column.model"
+import { Column } from './column.model';
 
 export type Board = {
-  line: number,
-  columns: Column[]
-}
+  line: number;
+  columns: Column[];
+};

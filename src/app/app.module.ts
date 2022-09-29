@@ -14,13 +14,10 @@ import { CheckersGameComponent } from './modules/checkers-game/checkers-game.com
     PieceComponent,
     SquareComponent,
     BoardComponent,
-    CheckersGameComponent
+    CheckersGameComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

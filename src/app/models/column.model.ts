@@ -1,3 +1,3 @@
 export type Column = {
-  column: number
-}
+  column: number;
+};
