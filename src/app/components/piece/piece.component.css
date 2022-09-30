@@ -2,6 +2,22 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
+  box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.piece::after {
+  content: '';
+  position: absolute;
+  background-color: #a1ffe0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.piece:hover::after {
+  opacity: .5;
 }
 
 .dark {
@@ -10,4 +26,13 @@
 
 .light {
   background: #F4DDCB;
+}
+
+.piece:hover::after {
+  background-color: #3A5E52;
+  cursor: pointer;
+}
+
+.toMove {
+  background-color: #9D2F29;
 }

@@ -1,10 +1,7 @@
 <body>
   <div class="{{color}}">
-    <app-piece *ngIf="!available"
-      [color]="getColor(line, column)"
+    <app-piece *ngIf="validId()"
+     [piece]="piece"
     ></app-piece>
   </div>
 </body>
-
-
-

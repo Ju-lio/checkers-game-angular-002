@@ -1,1 +1,4 @@
-<div class="piece {{color}}"></div>
+<div class="piece {{getColor()}}"
+  [class.toMove]="toMove"
+  (click)="changeMove()"
+></div>
