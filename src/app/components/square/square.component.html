@@ -1,7 +1,5 @@
 <body>
-  <div class="{{color}}">
-    <app-piece *ngIf="validId()"
-     [piece]="piece"
-    ></app-piece>
+  <div [class]="color" [class.toMove]="toMove" (click)="changeMove()">
+    <app-piece *ngIf="validId()" [piece]="piece"></app-piece>
   </div>
 </body>

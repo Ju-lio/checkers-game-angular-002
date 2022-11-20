@@ -17,3 +17,7 @@ div {
 body {
   display: flex;
 }
+
+.toMove {
+  background-color: #9D2F29;
+}

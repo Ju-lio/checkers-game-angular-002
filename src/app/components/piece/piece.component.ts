@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { COLOR } from 'src/app/enums/color.enum.ts';
 import { PLAYER } from 'src/app/enums/player.enum';
 import { Piece } from 'src/app/models/piece.model';
@@ -8,7 +8,7 @@ import { Piece } from 'src/app/models/piece.model';
   templateUrl: './piece.component.html',
   styleUrls: ['./piece.component.css'],
 })
-export class PieceComponent implements OnInit {
+export class PieceComponent {
   @Input() piece?: Piece;
 
   toMove?: boolean = this.piece?.toMove;
@@ -19,8 +19,6 @@ export class PieceComponent implements OnInit {
   readonly DARK_COLOR = COLOR.DARK;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   getColor() {
     console.log(this.piece?.player);

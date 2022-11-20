@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Piece } from 'src/app/models/piece.model';
 
 @Component({
@@ -6,17 +6,17 @@ import { Piece } from 'src/app/models/piece.model';
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.css'],
 })
-export class SquareComponent implements OnInit {
-  @Input() color: string = 'light ';
+export class SquareComponent {
+  @Input() color: string = 'light';
   @Input() line: number = 0;
   @Input() column: number = 0;
   @Input() piece?: Piece;
 
+  toMove: boolean = false;
+
   available = false;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   getColor(line: number, column: number) {
     switch ((line + column) % 2) {
@@ -29,5 +29,9 @@ export class SquareComponent implements OnInit {
 
   validId() {
     return this.piece?.id !== -1;
+  }
+
+  changeMove(): void {
+    this.toMove = !this.toMove;
   }
 }
