@@ -1,4 +1,5 @@
 export enum COLOR {
-  LIGHT = 'LIGHT_COLOR',
-  DARK = 'DARK_COLOR',
+  LIGHT = 'LIGHT',
+  DARK = 'DARK',
+  NONE = 'NONE',
 }

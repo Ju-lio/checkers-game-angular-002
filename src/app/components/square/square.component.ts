@@ -1,37 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Piece } from 'src/app/models/piece.model';
+import { Square } from 'src/app/models/square.model';
+import { Column } from 'src/app/models/column.model';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-square',
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.css'],
 })
-export class SquareComponent {
-  @Input() color: string = 'light';
-  @Input() line: number = 0;
-  @Input() column: number = 0;
-  @Input() piece?: Piece;
-
-  toMove: boolean = false;
-
-  available = false;
+export class SquareComponent implements OnInit {
+  @Input() square!: Square;
+  @Input() column!: Column;
 
   constructor() {}
 
-  getColor(line: number, column: number) {
-    switch ((line + column) % 2) {
-      case 0:
-        return 'light';
-      default:
-        return 'dark';
-    }
-  }
-
-  validId() {
-    return this.piece?.id !== -1;
-  }
-
-  changeMove(): void {
-    this.toMove = !this.toMove;
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnInit() {
+    // console.log(this.column.piece);
+    // console.log('square');
   }
 }

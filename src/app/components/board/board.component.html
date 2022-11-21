@@ -1,12 +1,17 @@
 <body>
   <div *ngFor="let square of squares">
-    <div *ngFor="let columns of square.columns">
-     <app-square
-      [color]="getColor(square.line, columns.column)"
-      [line]="square.line"
-      [column]="columns.column"
-      [piece]="getPiece(square.line, columns.column)"
-      ></app-square>
+    <div *ngFor="let column of square.columns">
+      <app-square
+        [square]="{
+          line: square.line,
+          columns: square.columns,
+          toMove: false
+        }"
+        [column]="{
+          id: column.id,
+          color: column.color,
+          piece: column.piece
+        }"></app-square>
     </div>
   </div>
 </body>

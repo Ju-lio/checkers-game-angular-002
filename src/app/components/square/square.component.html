@@ -1,5 +1,5 @@
 <body>
-  <div [class]="color" [class.toMove]="toMove" (click)="changeMove()">
-    <app-piece *ngIf="validId()" [piece]="piece"></app-piece>
+  <div [class]="column.color">
+    <app-piece *ngIf="column.piece.inGame" [piece]="column.piece"></app-piece>
   </div>
 </body>

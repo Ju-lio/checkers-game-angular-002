@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { PLAYER } from 'src/app/enums/player.enum';
+import { Component, Input, OnInit } from '@angular/core';
 import { Square } from 'src/app/models/square.model';
 import { Piece } from 'src/app/models/piece.model';
 
@@ -8,35 +7,16 @@ import { Piece } from 'src/app/models/piece.model';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   @Input() squares: Square[] = [];
   @Input() pieces: Piece[] = [];
+  piece!: Piece;
 
-  getColor(line: number, column: number) {
-    switch ((line + column) % 2) {
-      case 0:
-        return 'light';
-      default:
-        return 'dark';
-    }
-  }
+  constructor() {}
 
-  getPiece(line: number, column: number): Piece {
-    const pieces: Piece[] = this.pieces;
-    const emptyPiece: Piece = {
-      id: -1,
-      position: {
-        line: 0,
-        column: 0,
-      },
-      player: PLAYER.NONE,
-      inGame: true,
-    };
-
-    return (
-      pieces.find(piece => {
-        return piece.position.line === line && piece.position.column === column;
-      }) ?? emptyPiece
-    );
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnInit(): void {
+    // console.log('board');
+    // console.log(this.pieces);
   }
 }
