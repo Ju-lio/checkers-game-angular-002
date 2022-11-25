@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Piece } from 'src/app/models/piece.model';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-piece',

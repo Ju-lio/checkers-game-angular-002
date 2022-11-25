@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Piece } from 'src/app/models/piece.model';
+import { Component, Input } from '@angular/core';
 import { Square } from 'src/app/models/square.model';
 import { Column } from 'src/app/models/column.model';
 import { BoardService } from 'src/app/services/board.service';
@@ -9,15 +8,16 @@ import { BoardService } from 'src/app/services/board.service';
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.css'],
 })
-export class SquareComponent implements OnInit {
+export class SquareComponent {
   @Input() square!: Square;
   @Input() column!: Column;
 
-  constructor() {}
+  constructor(private boardService: BoardService) {}
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {
-    // console.log(this.column.piece);
-    // console.log('square');
+  sendPosition() {
+    this.boardService.sendPosition({
+      line: this.square.line,
+      column: this.column.id,
+    });
   }
 }

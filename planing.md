@@ -1,17 +1,23 @@
-square {
-  position {
-    line: 0,
-    column: 0,
-  },
-  available: true,
+class TabuleiroService {
+    private _tabuleiro;
+    private eventEmmiter = new EventEmmiter<Position>();
+
+    sendPosition(position: Position) {
+        this.eventEmmiter.emit(position);
+    }
+
+    getPosition(){
+        return this.eventEmmiter;
+    }
 }
 
-piece {
-  id: 1,
-  position {
-    line: 0,
-    column: 0,
-  },
-  player: PLAYER.NONE;
-  inGame: true,
+
+class TabuleiroComponent {
+    ngOnInit() {
+        this.tabuleiroService.getPosition().subscribe({
+            next: (position: Position) => {
+                console.log("[position]", position);
+            }
+        })
+    }
 }

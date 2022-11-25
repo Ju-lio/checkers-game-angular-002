@@ -1,5 +1,5 @@
 <body>
-  <div [class]="column.color">
+  <div [class]="column.color" (click)="sendPosition()">
     <app-piece *ngIf="column.piece.inGame" [piece]="column.piece"></app-piece>
   </div>
 </body>

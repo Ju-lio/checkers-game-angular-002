@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Position } from 'src/app/models/position.model';
 import { Square } from 'src/app/models/square.model';
 import { BoardService } from 'src/app/services/board.service';
 
@@ -12,8 +13,26 @@ export class CheckersGameComponent implements OnInit {
 
   squares: Square[] = [];
 
+  oldPosition?: Position;
+  newPosition?: Position;
+
   ngOnInit(): void {
     this.initGame();
+
+    this.boardService.getPosition().subscribe({
+      next: (position: Position) => {
+        this.setMovePosition(position);
+      },
+    });
+  }
+
+  setMovePosition(position: Position) {
+    if (!this.oldPosition) {
+      this.oldPosition = position;
+    } else {
+      this.newPosition = position;
+      this.movePiece(this.oldPosition, this.newPosition);
+    }
   }
 
   initGame() {
@@ -21,12 +40,13 @@ export class CheckersGameComponent implements OnInit {
     this.squares = this.boardService.squares;
   }
 
-  movePiece(
-    oldLine: number,
-    oldColumn: number,
-    newLine: number,
-    newColumn: number
-  ) {
-    this.boardService.movePiece(oldLine, oldColumn, newLine, newColumn);
+  movePiece(oldPosition: Position, newPosition: Position) {
+    this.boardService.movePiece(oldPosition, newPosition);
+    this.clearPositions();
+  }
+
+  clearPositions() {
+    this.oldPosition = undefined;
+    this.newPosition = undefined;
   }
 }

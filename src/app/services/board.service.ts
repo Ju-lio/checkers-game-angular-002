@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { COLOR } from '../enums/color.enum.ts';
 import { PLAYER } from '../enums/player.enum';
 import { Piece } from '../models/piece.model';
+import { Position } from '../models/position.model';
 import { Square } from '../models/square.model';
 
 @Injectable({
@@ -13,6 +14,17 @@ export class BoardService {
   readonly boardSize = 8;
   squares: Square[] = [];
   initialPieces: Piece[] = [];
+
+  // _tabuleiro;
+  eventEmmiter = new EventEmitter<Position>();
+
+  sendPosition(position: Position) {
+    this.eventEmmiter.emit(position);
+  }
+
+  getPosition() {
+    return this.eventEmmiter;
+  }
 
   initGame() {
     this.initialPieces = this.loadPieces();
@@ -57,16 +69,75 @@ export class BoardService {
     );
   }
 
-  movePiece(
-    oldLine: number,
-    oldColumn: number,
-    newLine: number,
-    newColumn: number
-  ) {
-    this.squares[newLine].columns[newColumn].piece =
-      this.squares[oldLine].columns[oldColumn].piece;
+  movePiece(oldPosition: Position, newPosition: Position) {
+    if (this.validMove(oldPosition, newPosition)) {
+      this.squares[newPosition.line].columns[newPosition.column].piece =
+        this.squares[oldPosition.line].columns[oldPosition.column].piece;
 
-    this.squares[oldLine].columns[oldColumn].piece = this.getEmptyPiece();
+      this.squares[oldPosition.line].columns[oldPosition.column].piece =
+        this.getEmptyPiece();
+    }
+  }
+
+  validMove(oldPosition: Position, newPosition: Position) {
+    if (
+      this.squares[newPosition.line].columns[newPosition.column].piece.inGame
+    ) {
+      return false;
+    }
+
+    if ((newPosition.line + newPosition.column) % 2 === 0) {
+      return false;
+    }
+
+    if (
+      Math.abs(newPosition.line - oldPosition.line) > 1 ||
+      Math.abs(newPosition.column - oldPosition.column) > 1
+    ) {
+      if (
+        Math.abs(newPosition.line - oldPosition.line) > 2 ||
+        Math.abs(newPosition.column - oldPosition.column) > 2
+      ) {
+        return false;
+      } else {
+        if (
+          !this.squares[
+            oldPosition.line - (oldPosition.line - newPosition.line) / 2
+          ].columns[
+            oldPosition.column - (oldPosition.column - newPosition.column) / 2
+          ].piece.inGame
+        ) {
+          return false;
+        }
+        if (
+          this.squares[
+            oldPosition.line - (oldPosition.line - newPosition.line) / 2
+          ].columns[
+            oldPosition.column - (oldPosition.column - newPosition.column) / 2
+          ].piece.inGame
+        ) {
+          if (
+            this.squares[
+              oldPosition.line - (oldPosition.line - newPosition.line) / 2
+            ].columns[
+              oldPosition.column - (oldPosition.column - newPosition.column) / 2
+            ].piece.color ===
+            this.squares[oldPosition.line].columns[oldPosition.column].piece
+              .color
+          ) {
+            return false;
+          }
+          this.squares[
+            oldPosition.line - (oldPosition.line - newPosition.line) / 2
+          ].columns[
+            oldPosition.column - (oldPosition.column - newPosition.column) / 2
+          ].piece = this.getEmptyPiece();
+        }
+        return true;
+      }
+    }
+
+    return true;
   }
 
   getEmptyPiece() {
