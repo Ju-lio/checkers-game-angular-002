@@ -1,6 +1,6 @@
 .piece {
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -10,8 +10,8 @@
   content: '';
   position: absolute;
   background-color: #a1ffe0;
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   opacity: 0;
 }

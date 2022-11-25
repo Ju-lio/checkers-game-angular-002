@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/checkers-game-angular-002",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

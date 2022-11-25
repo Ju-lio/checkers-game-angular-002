@@ -28,9 +28,30 @@ export class CheckersGameComponent implements OnInit {
 
   setMovePosition(position: Position) {
     if (!this.oldPosition) {
-      this.oldPosition = position;
+      this.setOldPosition(position);
     } else {
-      this.newPosition = position;
+      this.setNewPosition(position);
+    }
+  }
+
+  setOldPosition(position: Position) {
+    this.oldPosition = position;
+    if (this.oldPosition) {
+      if (
+        this.boardService.validSquare(position, {
+          line: position.line + 1,
+          column: position.column + 1,
+        })
+      ) {
+        this.squares[position.line + 1].columns[position.column + 1].toMove =
+          true;
+      }
+    }
+  }
+
+  setNewPosition(position: Position) {
+    this.newPosition = position;
+    if (this.oldPosition) {
       this.movePiece(this.oldPosition, this.newPosition);
     }
   }

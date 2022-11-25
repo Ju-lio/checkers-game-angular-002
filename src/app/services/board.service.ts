@@ -39,7 +39,6 @@ export class BoardService {
     return Array.from(Array(this.boardSize).keys()).map(line => ({
       line,
       columns: this.renderColumns(line),
-      toMove: false,
     }));
   }
 
@@ -48,6 +47,7 @@ export class BoardService {
       id: column,
       color: this.getSquareColor(line, column),
       piece: this.getInitialPiece(line, column),
+      toMove: false,
     }));
   }
 
@@ -77,6 +77,61 @@ export class BoardService {
       this.squares[oldPosition.line].columns[oldPosition.column].piece =
         this.getEmptyPiece();
     }
+  }
+
+  validSquare(oldPosition: Position, newPosition: Position) {
+    if (
+      this.squares[newPosition.line].columns[newPosition.column].piece.inGame
+    ) {
+      return false;
+    }
+
+    if ((newPosition.line + newPosition.column) % 2 === 0) {
+      return false;
+    }
+
+    if (
+      Math.abs(newPosition.line - oldPosition.line) > 1 ||
+      Math.abs(newPosition.column - oldPosition.column) > 1
+    ) {
+      if (
+        Math.abs(newPosition.line - oldPosition.line) > 2 ||
+        Math.abs(newPosition.column - oldPosition.column) > 2
+      ) {
+        return false;
+      } else {
+        if (
+          !this.squares[
+            oldPosition.line - (oldPosition.line - newPosition.line) / 2
+          ].columns[
+            oldPosition.column - (oldPosition.column - newPosition.column) / 2
+          ].piece.inGame
+        ) {
+          return false;
+        }
+        if (
+          this.squares[
+            oldPosition.line - (oldPosition.line - newPosition.line) / 2
+          ].columns[
+            oldPosition.column - (oldPosition.column - newPosition.column) / 2
+          ].piece.inGame
+        ) {
+          if (
+            this.squares[
+              oldPosition.line - (oldPosition.line - newPosition.line) / 2
+            ].columns[
+              oldPosition.column - (oldPosition.column - newPosition.column) / 2
+            ].piece.color ===
+            this.squares[oldPosition.line].columns[oldPosition.column].piece
+              .color
+          ) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+    return true;
   }
 
   validMove(oldPosition: Position, newPosition: Position) {

@@ -1,3 +1,4 @@
 <div
   [class]="['piece', piece.color]"
-></div>
+  [class.toMove]="toMove"
+  (click)="changeMove()"></div>

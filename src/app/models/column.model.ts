@@ -5,4 +5,5 @@ export type Column = {
   id: number;
   color: COLOR;
   piece: Piece;
+  toMove: boolean;
 };

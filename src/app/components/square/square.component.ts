@@ -12,6 +12,8 @@ export class SquareComponent {
   @Input() square!: Square;
   @Input() column!: Column;
 
+  toMove?: boolean = false;
+
   constructor(private boardService: BoardService) {}
 
   sendPosition() {
